@@ -30,7 +30,7 @@ export class AuthService {
     }, httpOptions);
   }
   update(user): Observable<any> {
-    return this.http.post(AppConstants.AUTH_API + 'setPass', {
+    return this.http.post(AppConstants.AUTH_API + 'setpassword', {
       displayName: user.displayName,
       email: user.email,
       password: user.password,

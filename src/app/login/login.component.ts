@@ -27,35 +27,35 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private route: ActivatedRoute, private userService: UserService) {}
 
-  ngOnInit(): void {
-	const token: string = this.route.snapshot.queryParamMap.get('token');
-	const error: string = this.route.snapshot.queryParamMap.get('error');
-  	if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      this.currentUser = this.tokenStorage.getUser();
-    }
-  	else if(token){
-  		this.tokenStorage.saveToken(token);
-  		this.userService.getCurrentUser().subscribe(
-  		      data => {
-  		        this.login(data);
-  		      },
-  		      err => {
-  		        this.errorMessage = err.error.message;
-  		        this.isLoginFailed = true;
-  		      }
-  		  );
-  	}
-  	else if(error){
-  		this.errorMessage = error;
-	    this.isLoginFailed = true;
-  	}
-    if (this.isLoggedIn && !this.currentUser.isEnable){
-      this.cambioContraseña = false;
-       this.formReg.displayName = this.currentUser.displayName;
-       this.formReg.email = this.currentUser.email;
-    }
+ngOnInit(): void {
+const token: string = this.route.snapshot.queryParamMap.get('token');
+const error: string = this.route.snapshot.queryParamMap.get('error');
+if (this.tokenStorage.getToken()) {
+    this.isLoggedIn = true;
+    this.currentUser = this.tokenStorage.getUser();
   }
+  else if (token){
+    this.tokenStorage.saveToken(token);
+    this.userService.getCurrentUser().subscribe(
+          data => {
+            this.login(data);
+          },
+          err => {
+            this.errorMessage = err.error.message;
+            this.isLoginFailed = true;
+          }
+      );
+  }
+  else if (error){
+    this.errorMessage = error;
+    this.isLoginFailed = true;
+  }
+  if (this.isLoggedIn && !this.currentUser.isEnable){
+    this.cambioContraseña = false;
+    this.formReg.displayName = this.currentUser.displayName;
+    this.formReg.email = this.currentUser.email;
+  }
+}
 
   onSubmit(): void {
     this.authService.login(this.form).subscribe(
@@ -75,17 +75,22 @@ export class LoginComponent implements OnInit {
     this.isLoginFailed = false;
     this.isLoggedIn = true;
     this.currentUser = this.tokenStorage.getUser();
-    window.location.reload();
+    if (this.currentUser.isEnable == true){
+    window.location.href = '/home';
+  }else{
+      window.location.reload();
+    }
   }
-
 
   onSubmit2(): void {
     this.formReg.email = this.currentUser.email;
     this.authService.update(this.formReg).subscribe(
       data => {
         this.tokenStorage.saveToken(data.accessToken);
-        this.login(data.user);
         this.cambioContraseña = true;
+        this.currentUser.isEnable = true;
+        window.location.href = '/home';
+
       },
       err => {
         this.errorMessage = err.error.message;
