@@ -12,6 +12,8 @@ import {Router} from '@angular/router';
 import {TokenStorageService} from '../_services/token-storage.service';
 import {tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import Swal from 'sweetalert2';
+
 
 const TOKEN_HEADER_KEY = 'Authorization';
 
@@ -39,9 +41,20 @@ export class AuthInterceptor implements HttpInterceptor {
 				if ((err.status !== 401 && err.status !== 403 && err.status !== 404) || window.location.pathname === loginPath) {
           return;
 				}else if (err.status === 401){
+          Swal.fire(
+            'Good job!',
+            'You clicked the button!',
+            'success'
+          );
           window.location.href = loginPath;
+
           this.token.signOut();
         }
+    Swal.fire(
+          'Good job!',
+          'You clicked the button!',
+          'success'
+        );
 		  window.location.href = this.previousUrl;
 			}
 		}

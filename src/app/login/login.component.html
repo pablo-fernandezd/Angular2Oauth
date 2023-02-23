@@ -1,6 +1,6 @@
 <div class="col-md-12" >
 	<div class="card card-container">
-		<img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
+		<img id="profile-img" src="/assets/img/logo.png" class="profile-img-card" />
 		<form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
 			<div class="form-group">
 				<label for="username">Email</label> <input (keydown.enter)="onSubmit()" type="text" class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel" />
@@ -42,7 +42,7 @@
 			</div>
 		</form>
 		<div class="alert alert-success" *ngIf="isLoggedIn && currentUser.isEnable">WelcomeS {{currentUser.displayName}} <br>Logged in as {{ currentUser.roles }}.</div>
-		<div class="alert alert-warning" *ngIf="isLoggedIn && !currentUser.isEnable">Crea tu contraseña {{currentUser.displayName}} <br>Debes crear tu contraseña para poder registrarte.</div>
+		<div class="alert alert-warning" *ngIf="isLoggedIn && !currentUser.isEnable">Bienvenido {{currentUser.displayName}}  <br>Debes crear tu contraseña para poder registrarte.</div>
     <form *ngIf="isLoggedIn && !currentUser.isEnable" name="form" (ngSubmit)="f.form.valid && onSubmit2()" #f="ngForm" novalidate>
       <div class="form-group">
         <label for="displayName">Display Name</label> <input (keydown.enter)="onSubmit2()" value="{{currentUser.displayName}}" type="text" class="form-control" name="displayName" [(ngModel)]="formReg.displayName" required minlength="3"

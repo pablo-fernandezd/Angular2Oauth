@@ -9,6 +9,7 @@ import {BoardUserComponent} from './board-user/board-user.component';
 import {BoardModeratorComponent} from './board-moderator/board-moderator.component';
 import {BoardAdminComponent} from './board-admin/board-admin.component';
 import { CreacionContraseña } from './login/creacionContraseña.guard';
+import {ScoreBoardComponent} from './score-board/score-board.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
+  { path: 'marcadorOnline', component: ScoreBoardComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

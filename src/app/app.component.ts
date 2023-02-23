@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TokenStorageService} from './_services/token-storage.service';
+import {FederacionService} from './_services/Federacion/federacion.service';
+
 
 @Component({
   selector: 'app-root',
@@ -12,11 +14,22 @@ export class AppComponent implements OnInit {
   showAdminBoard = false;
   showModeratorBoard = false;
   username: string;
+  federaciones: any;
+  navbarCollapsed = true;
 
-  constructor(private tokenStorageService: TokenStorageService) { }
+  constructor(private tokenStorageService: TokenStorageService,private federacionService: FederacionService) { }
 
   ngOnInit(): void {
+
     this.isLoggedIn = !!this.tokenStorageService.getToken();
+    this.federacionService.getAll().subscribe(
+      data => {
+        this.federaciones = data;
+      },
+      err => {
+        console.log(err);
+      }
+    );
 
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
@@ -28,7 +41,9 @@ export class AppComponent implements OnInit {
       this.username = user.displayName;
     }
   }
-
+  toggleNavbarCollapsed() {
+    this.navbarCollapsed = !this.navbarCollapsed;
+  }
   logout(): void {
     this.tokenStorageService.signOut();
     window.location.reload();

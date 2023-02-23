@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../_services/auth.service';
 import {TokenStorageService} from '../_services/token-storage.service';
+import {AppConstants} from '../common/app.constants';
 
 
 @Component({
@@ -14,6 +15,10 @@ export class RegisterComponent implements OnInit {
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
+  googleURL = AppConstants.GOOGLE_AUTH_URL;
+  facebookURL = AppConstants.FACEBOOK_AUTH_URL;
+  githubURL = AppConstants.GITHUB_AUTH_URL;
+  linkedinURL = AppConstants.LINKEDIN_AUTH_URL;
   private currentUser: any;
 
   constructor(private authService: AuthService,private tokenStorage: TokenStorageService) { }

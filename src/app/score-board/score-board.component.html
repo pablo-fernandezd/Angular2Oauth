@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h4>Marcador de Voleibol</h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <h5 class="text-center">Equipo A</h5>
+              <div class="d-flex justify-content-center mb-3">
+                <button class="btn btn-success mr-2" (click)="sumarPuntosA()">+</button>
+                <h1 class="display-1">{{ scoreA }}</h1>
+                <button class="btn btn-danger ml-2" (click)="restarPuntosA()">-</button>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <h5 class="text-center">Equipo B</h5>
+              <div class="d-flex justify-content-center mb-3">
+                <button class="btn btn-success mr-2" (click)="sumarPuntosB()">+</button>
+                <h1 class="display-1">{{ scoreB }}</h1>
+                <button class="btn btn-danger ml-2" (click)="restarPuntosB()">-</button>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center mt-4">
+            <div class="col-md-4">
+              <button class="btn btn-primary btn-block" (click)="switchEquipos()">Cambiar lado</button>
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-warning btn-block" (click)="finalizarSet()">Finalizar set</button>
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-danger btn-block" (click)="finalizarPartido()">Finalizar partido</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

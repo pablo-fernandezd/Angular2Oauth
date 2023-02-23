@@ -15,7 +15,14 @@ import {BoardModeratorComponent} from './board-moderator/board-moderator.compone
 import {BoardUserComponent} from './board-user/board-user.component';
 import { CreacionContraseña } from './login/creacionContraseña.guard';
 
+import bootstrap from 'bootstrap';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Importa NgbModule
+
+
+
 import {authInterceptorProviders} from './_helpers/auth.interceptor';
+import { ScoreBoardComponent } from './score-board/score-board.component';
 
 @NgModule({
   declarations: [
@@ -26,15 +33,27 @@ import {authInterceptorProviders} from './_helpers/auth.interceptor';
     ProfileComponent,
     BoardAdminComponent,
     BoardModeratorComponent,
-    BoardUserComponent
+    BoardUserComponent,
+    ScoreBoardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    NgbModule,
     HttpClientModule
   ],
   providers: [authInterceptorProviders, CreacionContraseña],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+    AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent,
+    ProfileComponent,
+    BoardAdminComponent,
+    BoardModeratorComponent,
+    BoardUserComponent
+  ]
 })
 export class AppModule { }
