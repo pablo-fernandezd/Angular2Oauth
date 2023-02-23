@@ -3,4 +3,9 @@ ng-container {
   margin: 0;
   padding: 0;
   border: none;
-}/* You can add global styles to this file, and also import other style files */
+}
+.container {
+  margin-top: 80px;
+}
+
+

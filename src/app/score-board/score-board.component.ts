@@ -15,6 +15,7 @@ export class ScoreBoardComponent {
   serving: string = '';
 
   // Métodos para manejar la lógica del marcador de voleibol
+  swapColumns: boolean;
   addPointTeamA() {
     this.scoreA++;
     this.checkServing();
@@ -36,12 +37,7 @@ export class ScoreBoardComponent {
   }
 
   switchEquipos() {
-    let temp = this.teamA;
-    this.teamA = this.teamB;
-    this.teamB = temp;
-    this.scoreA = 0;
-    this.scoreB = 0;
-    this.serving = '';
+    this.swapColumns = !this.swapColumns;
   }
 
   finishSet() {

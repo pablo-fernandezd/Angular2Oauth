@@ -1,0 +1,6 @@
+.equipo{
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  overflow: hidden; /* Oculta el texto que se desborda */
+  text-overflow: ellipsis; /* Agrega puntos suspensivos para indicar que el texto se ha cortado */
+  max-width: 100%;
+}

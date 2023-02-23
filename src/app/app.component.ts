@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   showModeratorBoard = false;
   username: string;
   federaciones: any;
-  navbarCollapsed = true;
+  navbarCollapsed = false;
 
   constructor(private tokenStorageService: TokenStorageService,private federacionService: FederacionService) { }
 
