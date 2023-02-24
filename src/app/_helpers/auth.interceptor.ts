@@ -19,7 +19,7 @@ const TOKEN_HEADER_KEY = 'Authorization';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  private previousUrl = '/login';
+  private previousUrl = '/home';
 	constructor(private token: TokenStorageService, private router: Router) {
 
 	}
@@ -41,21 +41,17 @@ export class AuthInterceptor implements HttpInterceptor {
 				if ((err.status !== 401 && err.status !== 403 && err.status !== 404) || window.location.pathname === loginPath) {
           return;
 				}else if (err.status === 401){
-          Swal.fire(
-            'Good job!',
-            'You clicked the button!',
-            'success'
-          );
-          window.location.href = loginPath;
 
+          window.location.href = loginPath;
           this.token.signOut();
         }
-    Swal.fire(
+
+        window.location.href = loginPath;
+        Swal.fire(
           'Good job!',
           'You clicked the button!',
           'success'
         );
-		  window.location.href = this.previousUrl;
 			}
 		}
 		));

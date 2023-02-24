@@ -8,22 +8,23 @@
         <div class="card-body">
           <div class="row flex-nowrap" [ngClass]="{' flex-row-reverse': swapColumns}">
             <div class="col-md-6 col-sm-6 col-ss-6">
-              <h5 class="flex-fill text-center equipo">Equipo A</h5>
+              <h5 class="flex-fill text-center equipo">{{this.partido.equipoLocal}}</h5>
               <div class="d-flex flex-column justify-content-center column mb-3">
                 <button class="btn btn-success" (click)="sumarPuntosA()">+</button>
-                <h1 class="text-center display-1">{{ scoreA }}</h1>
+                <h1 class="text-center display-1">{{ this.partido.marcador.puntosActualesLocal }}</h1>
                 <button class="btn btn-danger" (click)="restarPuntosA()">-</button>
               </div>
             </div>
             <div class="col-md-6 col-sm-6 col-ss-6">
-              <h5 class="flex-fill text-center equipo">Equipo B</h5>
+              <h5 class="flex-fill text-center equipo">{{this.partido.equipoVisitante}}</h5>
               <div class="d-flex flex-column justify-content-center column mb-3">
                 <button class="btn btn-success" (click)="sumarPuntosB()">+</button>
-                <h1 class="text-center display-1">{{ scoreB }}</h1>
+                <h1 class="text-center display-1">{{ this.partido.marcador.puntosActualesVisitante }}</h1>
                 <button class="btn btn-danger" (click)="restarPuntosB()">-</button>
               </div>
             </div>
           </div>
+          <h6 class=" text-center">{{partido.marcador.pset1Local}}-{{partido.marcador.pset1Visitante}}/{{partido.marcador.pset2Local}}-{{partido.marcador.pset2Visitante}}/{{partido.marcador.pset3Local}}-{{partido.marcador.pset3Visitante}}/{{partido.marcador.pset4Local}}-{{partido.marcador.pset4Visitante}}/{{partido.marcador.pset5Local}}-{{partido.marcador.pset5Visitante}}/</h6>
           <div class="row justify-content-center mt-4">
             <div class="col-md-4">
               <button class="btn btn-primary btn-block" (click)="switchEquipos()">Cambiar lado</button>
@@ -31,8 +32,11 @@
             <div class="col-md-4">
               <button class="btn btn-warning btn-block" (click)="finalizarSet()">Finalizar set</button>
             </div>
-            <div class="col-md-4">
+            <div *ngIf="!partido.estaFinalizado" class="col-md-4">
               <button class="btn btn-danger btn-block" (click)="finalizarPartido()">Finalizar partido</button>
+            </div>
+            <div *ngIf="partido.estaFinalizado" class="col-md-4">
+              <button class="btn btn-warning btn-block" (click)="desFinalizarPartido()">Desfinalizar partido</button>
             </div>
           </div>
         </div>

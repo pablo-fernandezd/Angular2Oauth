@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
-  { path: 'marcadorOnline', component: ScoreBoardComponent },
+  { path: 'marcadorOnline/:idPartido', component: ScoreBoardComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

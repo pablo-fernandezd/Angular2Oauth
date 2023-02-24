@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+
+import {MarcadorService} from '../_services/marcador/marcador.service';
 
 @Component({
   selector: 'app-volleyball-scoreboard',
@@ -6,90 +9,103 @@ import { Component } from '@angular/core';
   styleUrls: ['./score-board.component.css']
 })
 export class ScoreBoardComponent {
-  set: number = 1;
-  maxSets: number = 5;
-  teamA: string = 'Equipo A';
-  teamB: string = 'Equipo B';
-  scoreA: number = 0;
-  scoreB: number = 0;
-  serving: string = '';
+  public partido: any;
+  constructor(private rutaActiva: ActivatedRoute, private marcadorService: MarcadorService) {
+  }
+
+  ngOnInit(): void {
+    this.marcadorService.getPartidoById(this.rutaActiva.snapshot.params.idPartido).subscribe(
+      data => {
+        this.partido = data;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+  setsParseado:any;
 
   // Métodos para manejar la lógica del marcador de voleibol
   swapColumns: boolean;
-  addPointTeamA() {
-    this.scoreA++;
-    this.checkServing();
-  }
-
-  addPointTeamB() {
-    this.scoreB++;
-    this.checkServing();
-  }
-
-  checkServing() {
-    if ((this.scoreA + this.scoreB) % 2 == 0) {
-      this.serving = '';
-    } else if ((this.scoreA + this.scoreB) % 4 < 2) {
-      this.serving = this.teamA;
-    } else {
-      this.serving = this.teamB;
-    }
-  }
 
   switchEquipos() {
     this.swapColumns = !this.swapColumns;
   }
 
-  finishSet() {
-    if (this.set < this.maxSets) {
-      this.set++;
-      this.scoreA = 0;
-      this.scoreB = 0;
-      this.serving = '';
-    }
-  }
-
-  finishMatch() {
-    this.set = 1;
-    this.scoreA = 0;
-    this.scoreB = 0;
-    this.serving = '';
-  }
-
-  resumeSet() {
-    this.scoreA = 0;
-    this.scoreB = 0;
-    this.serving = '';
-  }
-
-  resumeMatch() {
-    this.set = 1;
-    this.scoreA = 0;
-    this.scoreB = 0;
-    this.serving = '';
-  }
-
-  finalizarPartido() {
-    console.log("fin");
-  }
+  finalizarPartido(){
+    this.marcadorService.finalizarPartido(this.rutaActiva.snapshot.params.idPartido).subscribe(
+      data => {
+        this.partido = data;
+      },
+      err => {
+        console.log(err);
+      }
+    );  }
 
   finalizarSet() {
-    console.log("fin");
+    this.marcadorService.finalizarSet(this.rutaActiva.snapshot.params.idPartido).subscribe(
+      data => {
+        this.partido = data;
+      },
+      err => {
+        console.log(err);
+      }
+    );  }
 
-  }
+  desFinalizarPartido(){
+    this.marcadorService.desFinalizarPartido(this.rutaActiva.snapshot.params.idPartido).subscribe(
+      data => {
+        this.partido = data;
+      },
+      err => {
+        console.log(err);
+      }
+    );  }
+
+  desFinalizarSet() {
+    this.marcadorService.desFinalizarSet(this.rutaActiva.snapshot.params.idPartido).subscribe(
+      data => {
+        this.partido = data;
+      },
+      err => {
+        console.log(err);
+      }
+    );  }
+
   restarPuntosA() {
-    this.scoreA--;
+    this.partido.marcador.puntosActualesLocal--;
+    this.marcadorService.restarPuntoLocal(this.partido.id).subscribe(
+      err => {
+        console.log(err);
+      }
+    );
   }
+
   restarPuntosB() {
-    this.scoreB--;
+    this.partido.marcador.puntosActualesVisitante--;
+    this.marcadorService.restarPuntoVisitante(this.partido.id).subscribe(
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   sumarPuntosA() {
-    this.scoreA++;
+    this.partido.marcador.puntosActualesLocal++;
+    this.marcadorService.sumarPuntoLocal(this.partido.id).subscribe(
+      err => {
+        console.log(err);
+      }
+    );
   }
+
   sumarPuntosB() {
-    this.scoreB++;
+    this.partido.marcador.puntosActualesVisitante++;
+    this.marcadorService.sumarPuntoVisitante(this.partido.id).subscribe(
+      err => {
+        console.log(err);
+      }
+    );
   }
 }
-
 

@@ -3,11 +3,11 @@ import { TestBed } from '@angular/core/testing';
 import { MarcadorService } from './marcador.service';
 
 describe('MarcadorService', () => {
-  let service: FederacionService;
+  let service: MarcadorService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FederacionService);
+    service = TestBed.inject(MarcadorService);
   });
 
   it('should be created', () => {

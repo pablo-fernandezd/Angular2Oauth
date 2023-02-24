@@ -14,12 +14,12 @@
       <li class="nav-item"><a href="/arbitro" class="nav-link" *ngIf="isLoggedIn" routerLink="user">Arbitro</a></li>
     </ul>
       <ul class="navbar-nav">
-        <ng-container *ngIf="federaciones.length < 3">
+        <ng-container *ngIf="federaciones!='undefined' && federaciones.length < 3">
         <ul class="nav-item" *ngFor="let federation of federaciones">
             <a title="{{ federation.nombreLargo }}" class="nav-link right" href="/federacion/{{ federation.nombre }}">{{ federation.nombre }}</a>
       </ul>
         </ng-container>
-        <ng-container *ngIf="federaciones.length > 3">
+        <ng-container *ngIf="federaciones!='undefined' && federaciones.length > 3">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle right" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               federaciones

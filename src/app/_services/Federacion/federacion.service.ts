@@ -21,7 +21,7 @@ export class FederacionService {
   }
 
   createFederacion(federacion): Observable<any> {
-    return this.http.post(AppConstants.AUTH_API + 'federacion', {
+    return this.http.post(AppConstants.API_URL + 'federacion', {
       nombre: federacion.nombre,
       nombreLargo: federacion.nombreLargo
     }, httpOptions);
