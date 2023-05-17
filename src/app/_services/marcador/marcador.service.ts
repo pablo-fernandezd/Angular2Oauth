@@ -34,22 +34,19 @@ export class MarcadorService {
     return this.http.put<any>(`${this.url}${id}/desfinalizarset`, null);
   }
 
-  sumarPuntoLocal(id: number): Observable<any> {
-    return this.http.put<any>(`${this.url}${id}/sumarpuntolocal`, null);
+  setPuntoLocal(id: number, puntos: number): Observable<any> {
+    return this.http.put<any>(`${this.url}${id}/setpuntolocal`, puntos);
   }
 
-  sumarPuntoVisitante(id: number): Observable<any> {
-    return this.http.put<any>(`${this.url}${id}/sumarpuntovisitante`, null);
+  setPuntoVisitante(id: number, puntos: number): Observable<any> {
+    return this.http.put<any>(`${this.url}${id}/setpuntovisitante`, puntos);
   }
 
-  restarPuntoLocal(id: number): Observable<any> {
-    return this.http.put<any>(`${this.url}${id}/restarpuntolocal`, null);
-  }
-
-  restarPuntoVisitante(id: number): Observable<any> {
-    return this.http.put<any>(`${this.url}${id}/restarpuntovisitante`, null);
-  }
   getPartidoById(id: number): Observable<any> {
     return this.http.get<any>(`${this.url}${id}`);
   }
+  getPartidosByUserId(id: number): Observable<any> {
+    return this.http.get<any>(`${this.url}arbitro/${id}`);
+  }
+
 }

@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;
+  showArbitroBoard = false;
   username: string;
   federaciones: any;
   navbarCollapsed = false;
@@ -36,6 +37,7 @@ export class AppComponent implements OnInit {
       this.roles = user.roles;
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showArbitroBoard = this.roles.includes('ROLE_ARBITRO');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
 
       this.username = user.displayName;

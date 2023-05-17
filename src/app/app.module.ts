@@ -11,6 +11,7 @@ import {RegisterComponent} from './register/register.component';
 import {HomeComponent} from './home/home.component';
 import {ProfileComponent} from './profile/profile.component';
 import {BoardAdminComponent} from './board-admin/board-admin.component';
+import {BoardArbitroComponent} from './board-arbitro/board-arbitro.component';
 import {BoardModeratorComponent} from './board-moderator/board-moderator.component';
 import {BoardUserComponent} from './board-user/board-user.component';
 import { CreacionContraseña } from './login/creacionContraseña.guard';
@@ -32,6 +33,7 @@ import { ScoreBoardComponent } from './score-board/score-board.component';
     HomeComponent,
     ProfileComponent,
     BoardAdminComponent,
+    BoardArbitroComponent,
     BoardModeratorComponent,
     BoardUserComponent,
     ScoreBoardComponent

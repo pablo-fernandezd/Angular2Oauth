@@ -74,7 +74,7 @@ export class ScoreBoardComponent {
 
   restarPuntosA() {
     this.partido.marcador.puntosActualesLocal--;
-    this.marcadorService.restarPuntoLocal(this.partido.id).subscribe(
+    this.marcadorService.setPuntoLocal(this.partido.id,this.partido.marcador.puntosActualesLocal).subscribe(
       err => {
         console.log(err);
       }
@@ -83,7 +83,7 @@ export class ScoreBoardComponent {
 
   restarPuntosB() {
     this.partido.marcador.puntosActualesVisitante--;
-    this.marcadorService.restarPuntoVisitante(this.partido.id).subscribe(
+    this.marcadorService.setPuntoVisitante(this.partido.id,this.partido.marcador.puntosActualesVisitante).subscribe(
       err => {
         console.log(err);
       }
@@ -92,7 +92,7 @@ export class ScoreBoardComponent {
 
   sumarPuntosA() {
     this.partido.marcador.puntosActualesLocal++;
-    this.marcadorService.sumarPuntoLocal(this.partido.id).subscribe(
+    this.marcadorService.setPuntoLocal(this.partido.id,this.partido.marcador.puntosActualesLocal).subscribe(
       err => {
         console.log(err);
       }
@@ -101,7 +101,7 @@ export class ScoreBoardComponent {
 
   sumarPuntosB() {
     this.partido.marcador.puntosActualesVisitante++;
-    this.marcadorService.sumarPuntoVisitante(this.partido.id).subscribe(
+    this.marcadorService.setPuntoVisitante(this.partido.id,this.partido.marcador.puntosActualesVisitante).subscribe(
       err => {
         console.log(err);
       }
