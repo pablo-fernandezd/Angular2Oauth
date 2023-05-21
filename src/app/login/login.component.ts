@@ -28,14 +28,18 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private route: ActivatedRoute, private userService: UserService) {}
 
 ngOnInit(): void {
+this.isLoggedIn = false;
 const token: string = this.route.snapshot.queryParamMap.get('token');
 const error: string = this.route.snapshot.queryParamMap.get('error');
 if (this.tokenStorage.getToken()) {
+  console.log("logeado");
     this.isLoggedIn = true;
     this.currentUser = this.tokenStorage.getUser();
   }
   else if (token){
-    this.tokenStorage.saveToken(token);
+  console.log("token");
+
+  this.tokenStorage.saveToken(token);
     this.userService.getCurrentUser().subscribe(
           data => {
             this.login(data);
@@ -50,9 +54,14 @@ if (this.tokenStorage.getToken()) {
     this.errorMessage = error;
     this.isLoginFailed = true;
   }
-  if (this.isLoggedIn && !this.currentUser.isEnable){
+  if(this.isLoggedIn && this.currentUser.isEnable){
+    window.location.href = '/home';
+  }
+  else if (this.isLoggedIn && !this.currentUser.isEnable){
     this.cambioContraseña = false;
-    this.formReg.displayName = this.currentUser.displayName;
+    this.formReg.nombre = this.currentUser.nombre;
+    this.formReg.apellido1 = this.currentUser.apellido1;
+    this.formReg.apellido2 = this.currentUser.apellido2;
     this.formReg.email = this.currentUser.email;
   }
 }
@@ -89,6 +98,7 @@ if (this.tokenStorage.getToken()) {
         this.tokenStorage.saveToken(data.accessToken);
         this.cambioContraseña = true;
         this.currentUser.isEnable = true;
+        this.login(this.currentUser);
         window.location.href = '/home';
 
       },

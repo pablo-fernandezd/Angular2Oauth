@@ -22,8 +22,9 @@ export class AuthService {
 
   register(user): Observable<any> {
     return this.http.post(AppConstants.AUTH_API + 'signup', {
-      displayName: user.displayName,
-      email: user.email,
+      nombre: user.nombre,
+      apellido1: user.apellido1,
+      apellido2: user.apellido2,      email: user.email,
       password: user.password,
       matchingPassword: user.matchingPassword,
       socialProvider: 'LOCAL'
@@ -31,7 +32,9 @@ export class AuthService {
   }
   update(user): Observable<any> {
     return this.http.post(AppConstants.AUTH_API + 'setpassword', {
-      displayName: user.displayName,
+      nombre: user.nombre,
+      apellido1: user.apellido1,
+      apellido2: user.apellido2,
       email: user.email,
       password: user.password,
       matchingPassword: user.matchingPassword,

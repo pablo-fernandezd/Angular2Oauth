@@ -10,8 +10,9 @@
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item"><a href="/home" class="nav-link right" routerLink="home">Home </a></li>
       <li class="nav-item" *ngIf="showAdminBoard"><a href="/admin" class="nav-link" routerLink="admin">Administrador</a></li>
+      <li class="nav-item" *ngIf="showArbitroBoard"><a href="/arbitro" class="nav-link" routerLink="mod">Arbitro</a></li>
       <li class="nav-item" *ngIf="showModeratorBoard"><a href="/mod" class="nav-link" routerLink="mod">Moderador</a></li>
-      <li class="nav-item"><a href="/arbitro" class="nav-link" *ngIf="isLoggedIn" routerLink="user">Arbitro</a></li>
+      <li class="nav-item"><a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">Usuario</a></li>
     </ul>
       <ul class="navbar-nav">
         <ng-container *ngIf="federaciones!='undefined' && federaciones.length < 3">
