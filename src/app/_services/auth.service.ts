@@ -41,4 +41,11 @@ export class AuthService {
       socialProvider: 'LOCAL'
     }, httpOptions);
   }
+  resetPasswordSendMail(email: string): Observable<any>  {
+    const params = { email };
+    return this.http.post(AppConstants.AUTH_API + 'resetPassword', null, { params });
+  }resetNewPassword(password: string, token: string): Observable<any>  {
+    const params = { password, token };
+    return this.http.post(AppConstants.AUTH_API + 'updatePassword', null, { params });
+  }
 }

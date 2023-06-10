@@ -7,6 +7,7 @@ import {HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
+import {ResetPasswordComponent} from './resetPassword/resetPassword.component';
 import {RegisterComponent} from './register/register.component';
 import {HomeComponent} from './home/home.component';
 import {ProfileComponent} from './profile/profile.component';
@@ -29,6 +30,7 @@ import { ScoreBoardComponent } from './score-board/score-board.component';
   declarations: [
     AppComponent,
     LoginComponent,
+    ResetPasswordComponent,
     RegisterComponent,
     HomeComponent,
     ProfileComponent,
