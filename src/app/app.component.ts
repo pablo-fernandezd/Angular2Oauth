@@ -18,8 +18,18 @@ export class AppComponent implements OnInit {
   federaciones: any;
   navbarCollapsed = false;
 
-  constructor(private tokenStorageService: TokenStorageService,private federacionService: FederacionService) { }
 
+
+
+
+
+  constructor(private tokenStorageService: TokenStorageService,private federacionService: FederacionService) { }
+// Filtramos las rutas y actualizamos la condición cuando la ruta cambia
+  this.router.events.pipe(
+    filter(event => event instanceof NavigationStart)
+).subscribe((event: NavigationStart) => {
+  this.isRutaEspecial(event.url);
+});
   ngOnInit(): void {
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -43,6 +53,9 @@ export class AppComponent implements OnInit {
       this.username = user.displayName;
     }
   }
+isRutaEspecial(url: string) {
+  return url.includes("/federaciones")
+}
   toggleNavbarCollapsed() {
     this.navbarCollapsed = !this.navbarCollapsed;
   }
