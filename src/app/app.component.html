@@ -14,13 +14,18 @@
       <li class="nav-item" *ngIf="showModeratorBoard"><a href="/mod" class="nav-link" routerLink="mod">Moderador</a></li>
       <li class="nav-item"><a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">Usuario</a></li>
     </ul>
-      <ul class="navbar-nav">
-        <ng-container *ngIf="federaciones!='undefined' && federaciones.length < 3">
-        <ul class="nav-item" *ngFor="let federation of federaciones">
-            <a title="{{ federation.nombreLargo }}" class="nav-link right" href="/federacion/{{ federation.nombre }}">{{ federation.nombre }}</a>
+      <ul class="navbar-nav" *ngIf="!isRutaEspecial">
+        <ng-container *ngIf="federaciones && federaciones.length <=3">
+        <ul class="nav-item align-content-center" *ngFor="let federation of federaciones">
+            <a title="{{ federation.nombre}}" class="nav-link right" href="/federacion/{{ federation.nombre }}">{{ federation.nombreLargo }}</a>
       </ul>
         </ng-container>
-        <ng-container *ngIf="federaciones!='undefined' && federaciones.length > 3">
+        <ng-container *ngIf="federaciones && federaciones.length > 3 && federaciones.length < 6">
+        <ul class="nav-item" *ngFor="let federation of federaciones">
+            <a title="{{ federation.nombreLargo}}" class="nav-link right" href="/federacion/{{ federation.nombre}}">{{ federation.nombre }}</a>
+        </ul>
+        </ng-container>
+        <ng-container *ngIf="federaciones && federaciones.length > 6">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle right" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               federaciones

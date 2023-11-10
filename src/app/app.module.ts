@@ -4,6 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { filter } from 'rxjs/operators';
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
@@ -25,6 +26,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Importa NgbModule
 
 import {authInterceptorProviders} from './_helpers/auth.interceptor';
 import { ScoreBoardComponent } from './score-board/score-board.component';
+import {FederacionesComponent} from './federaciones/federaciones.component';
+import {NavigationStart, Router} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { ScoreBoardComponent } from './score-board/score-board.component';
     BoardArbitroComponent,
     BoardModeratorComponent,
     BoardUserComponent,
-    ScoreBoardComponent
+    ScoreBoardComponent,
+    FederacionesComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,20 @@ import { ScoreBoardComponent } from './score-board/score-board.component';
     ProfileComponent,
     BoardAdminComponent,
     BoardModeratorComponent,
-    BoardUserComponent
+    BoardUserComponent,
+    FederacionesComponent
   ]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private router: Router) {
+    // Filtramos las rutas y actualizamos la condición cuando la ruta cambia
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationStart)
+    ).subscribe((event: NavigationStart) => {
+      this.isRutaEspecial(event.url);
+    });
+  }
+  isRutaEspecial(url: string) {
+return url.includes("/federaciones")
+  }
+}
