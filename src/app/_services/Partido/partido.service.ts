@@ -20,4 +20,5 @@ export class PartidoService {
   crearOActualizarPartido(partido: PartidoDTO): Observable<any> {
     return this.http.post(`${this.url}/create`, partido);
   }
+
 }

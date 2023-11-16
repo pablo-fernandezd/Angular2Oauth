@@ -8,13 +8,13 @@
     </button>
     <div class="collapse navbar-collapse right mr-auto" id="navbarNav" [ngbCollapse]="!navbarCollapsed">
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
-      <li class="nav-item"><a href="/home" class="nav-link right" routerLink="home">Home </a></li>
+      <li class="nav-item"><a href="/" class="nav-link right" routerLink="home">Home </a></li>
       <li class="nav-item" *ngIf="showAdminBoard"><a href="/admin" class="nav-link" routerLink="admin">Administrador</a></li>
-      <li class="nav-item" *ngIf="showArbitroBoard"><a href="/arbitro" class="nav-link" routerLink="mod">Arbitro</a></li>
+      <li class="nav-item" *ngIf="showArbitroBoard"><a href="/arbitro" class="nav-link" routerLink="arbitro">Arbitro</a></li>
       <li class="nav-item" *ngIf="showModeratorBoard"><a href="/mod" class="nav-link" routerLink="mod">Moderador</a></li>
       <li class="nav-item"><a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">Usuario</a></li>
     </ul>
-      <ul class="navbar-nav" *ngIf="!isRutaEspecial">
+      <ul class="navbar-nav" *ngIf="!isRutaEspecialFlag">
         <ng-container *ngIf="federaciones && federaciones.length <=3">
         <ul class="nav-item align-content-center" *ngFor="let federation of federaciones">
             <a title="{{ federation.nombre}}" class="nav-link right" href="/federacion/{{ federation.nombre }}">{{ federation.nombreLargo }}</a>
@@ -39,6 +39,13 @@
           </li>
         </ng-container>
       </ul>
+      <ul class="navbar-nav" *ngIf="isRutaEspecialFlag">
+        <ng-container *ngIf="secciones && federaciones.length <=3">
+        <ul class="nav-item align-content-center" *ngFor="let seccion of secciones">
+            <a title="{{ seccion.nombreLargo}}" class="nav-link right" href="/federacion/{{ federacion  }}/{{ seccion.nombreLargo }}">{{ seccion.nombreLargo }}</a>
+        </ul>
+        </ng-container>
+      </ul>
     <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
       <li class="nav-item"><a href="/register" class="nav-link mr-auto" routerLink="register">Sign Up</a></li>
       <li class="nav-item"><a href="/login" class="nav-link mr-auto" routerLink="login">Login</a></li>
@@ -47,6 +54,7 @@
       <li class="nav-item"><a href="/profile" class="nav-link mr-auto" routerLink="profile">{{ username }}</a></li>
       <li class="nav-item"><a href class="nav-link" (click)="logout()">LogOut</a></li>
     </ul>
+
     </div>
 
 
@@ -60,6 +68,11 @@
 
 	</nav>
   <div class="container-fluid bg-light container">
+  <ng-container *ngIf="seccionesFiltradas && seccionesFiltradas > 0 ">
+    <div class="nav-item" *ngFor="let entrada of seccionesFiltradas.entradas">
+      <h2>{{ entrada.titulo}} WTF</h2>
+    </div>
+  </ng-container>
     <router-outlet></router-outlet>
   </div>
 </div>

@@ -12,6 +12,7 @@ import {BoardAdminComponent} from './board-admin/board-admin.component';
 import { CreacionContraseña } from './login/creacionContraseña.guard';
 import {ScoreBoardComponent} from './score-board/score-board.component';
 import {FederacionesComponent} from './federaciones/federaciones.component';
+import {BoardArbitroComponent} from './board-arbitro/board-arbitro.component';
 
 
 const routes: Routes = [
@@ -24,8 +25,9 @@ const routes: Routes = [
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
+  { path: 'arbitro', component: BoardArbitroComponent },
   { path: 'federacion/:federacion', component: FederacionesComponent},
-  { path: 'marcadorOnline/:idPartido', component: ScoreBoardComponent },
+  { path: 'marcador/:idPartido', component: ScoreBoardComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

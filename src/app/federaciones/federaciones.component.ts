@@ -10,7 +10,11 @@ import {FederacionService} from '../_services/Federacion/federacion.service';
 })
 export class FederacionesComponent implements OnInit {
 
-  content: string;
+  content: any;
+  secciones: any;
+  seccionesFiltradas: any;
+  entradas: any;
+  nombreLargo: string;
 
   constructor(private rutaActiva: ActivatedRoute, private federacionService: FederacionService) { }
 
@@ -18,12 +22,21 @@ export class FederacionesComponent implements OnInit {
     this.federacionService.getByName(this.rutaActiva.snapshot.params.federacion)
       .subscribe(
       data => {
-        this.content = data[0];
+        this.secciones = data[0].secciones;
+        this.filtrarSecciones("Noticias");
+        this.nombreLargo = data[0].nombreLargo;
       },
       err => {
         this.content = JSON.parse(err.error).message;
       }
     );
+  }
+  filtrarSecciones(nombreSeccion: string) {
+    // Lógica para filtrar secciones según el nombre de la federación
+    if (nombreSeccion) {
+      this.seccionesFiltradas = this.secciones.filter(seccion => seccion.nombreLargo === nombreSeccion)[0];
+      this.entradas = this.seccionesFiltradas.entradas;
+    }
   }
 
 }

@@ -1,4 +1,14 @@
 
 <div>
-  <h6 class="text-muted py-5">{{ content.nombreLargo }}</h6>
+  <h1 class="text-muted py-5">{{  nombreLargo }}</h1>
+  <ng-container *ngIf="entradas && entradas.length > 0">
+    <div class="container" *ngFor="let entrada of entradas">
+      <h2>{{entrada.titulo}}</h2>
+      <p>{{entrada.descripcion}}</p>
+      <ng-container *ngIf="entrada.imagenTitulo!=null">
+        <img src="{{entrada.titulo}}" alt="imagen de la entrada">
+      </ng-container>
+    </div>
+  </ng-container>
+
 </div>

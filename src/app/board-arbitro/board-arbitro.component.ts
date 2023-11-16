@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from '../_services/user.service';
+import {MarcadorService} from '../_services/marcador/marcador.service';
+import {TokenStorageService} from '../_services/token-storage.service';
 
 @Component({
   selector: 'app-board-user',
@@ -9,13 +10,16 @@ import {UserService} from '../_services/user.service';
 export class BoardArbitroComponent implements OnInit {
 
   content: string;
+  private currentUser: any;
 
-  constructor(private userService: UserService) { }
+  constructor(private marcadorService: MarcadorService, private token: TokenStorageService) { }
 
   ngOnInit(): void {
-    this.userService.getUserBoard().subscribe(
+    this.currentUser = this.token.getUser();
+    this.marcadorService.getPartidosByUserId(this.currentUser.id).subscribe(
       data => {
         this.content = data;
+        console.log(this.content);
       },
       err => {
         this.content = JSON.parse(err.error).message;

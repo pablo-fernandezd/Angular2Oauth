@@ -66,15 +66,4 @@ import {NavigationStart, Router} from '@angular/router';
   ]
 })
 export class AppModule {
-  constructor(private router: Router) {
-    // Filtramos las rutas y actualizamos la condición cuando la ruta cambia
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationStart)
-    ).subscribe((event: NavigationStart) => {
-      this.isRutaEspecial(event.url);
-    });
-  }
-  isRutaEspecial(url: string) {
-return url.includes("/federaciones")
-  }
 }
