@@ -2,15 +2,26 @@
 	<div class="card card-container">
 		<img id="profile-img" src="/assets/img/logo.png" class="profile-img-card" />
 		<form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-			<div class="form-group">
-				<label for="displayName">Display Name</label> <input type="text" class="form-control" name="displayName" [(ngModel)]="form.displayName" required minlength="3"
-					maxlength="20" #displayName="ngModel" />
-				<div class="alert-danger" *ngIf="f.submitted && displayName.invalid">
-					<div *ngIf="displayName.errors.required">Display Name is required</div>
-					<div *ngIf="displayName.errors.minlength">Display Name must be at least 3 characters</div>
-					<div *ngIf="displayName.errors.maxlength">Display Name must be at most 20 characters</div>
-				</div>
-			</div>
+      <div class="form-group">
+        <label for="nombre">Nombre</label> <input type="text" class="form-control" name="nombre" [(ngModel)]="form.nombre" required minlength="3"
+                                                 #nombre="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && nombre.invalid">
+          <div *ngIf="nombre.errors.required">El nombre es obligatorio</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="apellido1">Primer apellido</label> <input  type="text" class="form-control" name="apellido1" [(ngModel)]="form.apellido1" required minlength="3"
+                                                              maxlength="20" #apellido1="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && apellido1.invalid">
+          <div *ngIf="apellido1.errors.required">El primer apellido es obligatorio</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="apellido2">Segundo apellido</label> <input type="text" class="form-control" name="apellido2" [(ngModel)]="form.apellido2" required minlength="3" #apellido2="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && apellido2.invalid">
+          <div *ngIf="apellido2.errors.required">El segundo apellido es obligatorio</div>
+        </div>
+      </div>
 			<div class="form-group">
 				<label for="email">Email</label> <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email #email="ngModel" />
 				<div class="alert-danger" *ngIf="f.submitted && email.invalid">

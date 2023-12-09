@@ -4,14 +4,15 @@ import {UserService} from '../_services/user.service';
 import {TokenStorageService} from '../_services/token-storage.service';
 import {ActivatedRoute} from '@angular/router';
 import {AppConstants} from '../common/app.constants';
+import Swal from 'sweetalert2';
 
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  templateUrl: './resetPassword.component.html',
+  styleUrls: ['./resetPassword.component.css']
 })
-export class LoginComponent implements OnInit {
+export class ResetPasswordComponent implements OnInit {
 
   form: any = {};
   isLoggedIn = false;
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
   linkedinURL = AppConstants.LINKEDIN_AUTH_URL;
   formReg: any = {};
   cambioContraseña = true;
+  tokenResetPassword: string = this.route.snapshot.params.token;
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private route: ActivatedRoute, private userService: UserService) {}
 
@@ -54,7 +56,7 @@ if (this.tokenStorage.getToken()) {
     this.errorMessage = error;
     this.isLoginFailed = true;
   }
-if(this.isLoggedIn && this.currentUser.isEnable){
+  if(this.isLoggedIn && this.currentUser.isEnable){
     window.location.href = '/home';
   }
   else if (this.isLoggedIn && !this.currentUser.isEnable){
@@ -66,17 +68,14 @@ if(this.isLoggedIn && this.currentUser.isEnable){
   }
 }
 
+
   onSubmit(): void {
-    this.authService.login(this.form).subscribe(
-      data => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.login(data.user);
-      },
-      err => {
-        this.errorMessage = err.error.message;
-        this.isLoginFailed = true;
-      }
+    Swal.fire(
+      'Email enviado!',
+      'Si el email corresponde a un usuario recibirá un correo de recuperación en breve!',
+      'success'
     );
+    this.authService.resetPasswordSendMail(this.form.username).subscribe();
   }
 
   login(user): void {
@@ -85,24 +84,31 @@ if(this.isLoggedIn && this.currentUser.isEnable){
     this.isLoggedIn = true;
     this.currentUser = this.tokenStorage.getUser();
     if (this.currentUser.isEnable == true){
-    window.location.href = '/home';
+    window.location.href = '/login';
   }else{
       window.location.reload();
     }
   }
 
   onSubmit2(): void {
-    this.formReg.email = this.currentUser.email;
-    this.authService.update(this.formReg).subscribe(
+    this.authService.resetNewPassword(this.formReg.password, this.tokenResetPassword).subscribe(
       data => {
-        this.tokenStorage.saveToken(data.accessToken);
+        Swal.fire(
+          'Contraseña actualizada!',
+          'Ya puede acceder con la nueva contraseña!',
+          'success',
+          ).then(() => {
+          window.location.href = '/home';
+        });
         this.cambioContraseña = true;
-        this.currentUser.isEnable = true;
-        this.login(this.currentUser);
-        window.location.href = '/home';
 
       },
       err => {
+        Swal.fire(
+          'No se pudo actualziar la contraseña',
+          'Ha surgido un error cambiando la contraseña, vuelva a intentarlo más tarde',
+          'error'
+        );
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
       }

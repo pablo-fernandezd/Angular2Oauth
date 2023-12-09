@@ -1,38 +1,59 @@
-<div id="app" class="bg-light justify-content-between">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex flex-row space-between fixed-top">
+<div id="app" class="bg-light justify-content-between m-5 sticky-top ">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex flex-row space-between fixed-top h-auto pb-0 ">
     <a class="navbar-brand p-0 white-ou left" href="/">
-      <img src="/assets/img/logo.png" style="filter: invert(100%);" width="55" height="50" alt="">
+      <img src="/assets/img/logo.png" style="filter: invert(100%);" width="75" height="65" alt="">
     </a>
     <button class="navbar-toggler right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse right mr-auto" id="navbarNav" [ngbCollapse]="!navbarCollapsed">
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
-      <li class="nav-item"><a href="/home" class="nav-link right" routerLink="home">Home </a></li>
+      <li class="nav-item"><a href="/" class="nav-link right" routerLink="home">Home </a></li>
       <li class="nav-item" *ngIf="showAdminBoard"><a href="/admin" class="nav-link" routerLink="admin">Administrador</a></li>
-      <li class="nav-item" *ngIf="showModeratorBoard"><a href="/mod" class="nav-link" routerLink="mod">Moderador</a></li>
-      <li class="nav-item"><a href="/arbitro" class="nav-link" *ngIf="isLoggedIn" routerLink="user">Arbitro</a></li>
+      <li class="nav-item" *ngIf="showArbitroBoard"><a href="/arbitro" class="nav-link" routerLink="arbitro">Arbitro</a></li>
+      <li class="nav-item"><a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">Usuario</a></li>
     </ul>
       <ul class="navbar-nav">
-        <ng-container *ngIf="federaciones!='undefined' && federaciones.length < 3">
-        <ul class="nav-item" *ngFor="let federation of federaciones">
-            <a title="{{ federation.nombreLargo }}" class="nav-link right" href="/federacion/{{ federation.nombre }}">{{ federation.nombre }}</a>
-      </ul>
-        </ng-container>
-        <ng-container *ngIf="federaciones!='undefined' && federaciones.length > 3">
-          <li class="nav-item dropdown">
+        <ul class="navbar-nav" *ngIf="federaciones && federaciones?.length <= 3">
+          <ng-container *ngFor="let federation of federaciones">
+            <li class="nav-item dropdown" [class.active]="federacion==federation.nombre">
+              <a class="nav-link dropdown-toggle right" id="navbarDropdown_{{ federation.nombreLargo }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ federation.nombre }}
+              </a>
+              <div class="dropdown-menu" *ngIf="federation.secciones && federation.secciones?.length>0" aria-labelledby="navbarDropdown_{{ federation.nombreLargo }}">
+                <a *ngFor="let seccion of federation.secciones" class="dropdown-item" title="{{ seccion.nombreLargo }}" href="/federacion/{{ federation.nombre }}/{{ seccion.nombreLargo }}">{{ seccion.nombreLargo }}</a>
+              </div>
+            </li>
+          </ng-container>
+        </ul>
+        <ul class="navbar-nav" *ngIf="federaciones && federaciones?.length <= 6 && federaciones?.length>3 ">
+          <ng-container *ngFor="let federation of federaciones">
+            <li class="nav-item dropdown" [class.active]="federacion==federation.nombre">
+              <a *ngIf="federation.secciones?.length>0" class="nav-link dropdown-toggle right" id="navbarDropdown_{{ federation.nombreLargo }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ federation.nombre }}
+              </a>
+              <a *ngIf="!federation.secciones?.length>0" class="nav-link right" id="navbarDropdown_{{ federation.nombreLargo }}" href="/federacion/{{ federation.nombre}}" >
+                {{ federation.nombre }}
+              </a>
+              <div class="dropdown-menu" *ngIf="federation.secciones && federation.secciones?.length>0" aria-labelledby="navbarDropdown_{{ federation.nombreLargo }}">
+                <a *ngFor="let seccion of federation.secciones" class="dropdown-item" title="{{ seccion.nombreLargo }}" href="/federacion/{{ federation.nombre }}/{{ seccion.nombreLargo }}">{{ seccion.nombreLargo }}</a>
+              </div>
+            </li>
+          </ng-container>
+        </ul>
+        <ng-container *ngIf="federaciones && federaciones?.length >= 7">
+          <li class="nav-item dropdown" >
             <a class="nav-link dropdown-toggle right" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               federaciones
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <ng-template #dropdownItems>
-                <a *ngFor="let federation of federaciones" class="dropdown-item" title="{{ federation.nombreLargo }}" href="/federacion/{{ federation.nombre  }}">{{ federation.nombre }}</a>
+                <a *ngFor="let federation of federaciones"[class.active]="federacion==federation.nombre" class="dropdown-item" title="{{ federation.nombreLargo }}" href="/federacion/{{ federation.nombre  }}">{{ federation.nombre }}</a>
               </ng-template>
               <ng-container *ngTemplateOutlet="dropdownItems"></ng-container>
             </div>
           </li>
-        </ng-container>
-      </ul>
+        </ng-container>      </ul>
     <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
       <li class="nav-item"><a href="/register" class="nav-link mr-auto" routerLink="register">Sign Up</a></li>
       <li class="nav-item"><a href="/login" class="nav-link mr-auto" routerLink="login">Login</a></li>
@@ -41,6 +62,7 @@
       <li class="nav-item"><a href="/profile" class="nav-link mr-auto" routerLink="profile">{{ username }}</a></li>
       <li class="nav-item"><a href class="nav-link" (click)="logout()">LogOut</a></li>
     </ul>
+
     </div>
 
 
@@ -54,6 +76,15 @@
 
 	</nav>
   <div class="container-fluid bg-light container">
+  <ng-container *ngIf="seccionesFiltradas && seccionesFiltradas?.length > 0 ">
+    <div class="nav-item" *ngFor="let entrada of seccionesFiltradas.entradas">
+      <h2>{{ entrada.titulo}} WTF</h2>
+    </div>
+  </ng-container>
     <router-outlet></router-outlet>
   </div>
 </div>
+
+
+<link *ngIf="!isHomeRoute()" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+

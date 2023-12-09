@@ -38,20 +38,13 @@ export class AuthInterceptor implements HttpInterceptor {
       },
 		(err: any) => {
 			if (err instanceof HttpErrorResponse) {
-				if ((err.status !== 401 && err.status !== 403 && err.status !== 404) || window.location.pathname === loginPath) {
+				if ((err.status !== 401 && err.status !== 403) || window.location.pathname === loginPath) {
           return;
 				}else if (err.status === 401){
 
-          window.location.href = loginPath;
+         window.location.href = loginPath;
           this.token.signOut();
         }
-
-        window.location.href = loginPath;
-        Swal.fire(
-          'Good job!',
-          'You clicked the button!',
-          'success'
-        );
 			}
 		}
 		));

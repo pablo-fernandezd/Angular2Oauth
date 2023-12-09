@@ -1,3 +1,65 @@
 <div>
-  <h6 class="text-muted py-5">{{ content }}</h6>
+  <h1 class="text-muted py-5">Partidos designados</h1>
+  <ng-container *ngIf="content && content.length > 0">
+    <div class="input-group-prepend d-flex justify-content-center m-2">
+      <button class="btn btn-outline-secondary" type="button" (click)="filtrarPorEstado(null)">*</button>
+      <button class="btn btn-outline-secondary" type="button" (click)="filtrarPorEstado(0)">Pendiente</button>
+      <button class="btn btn-outline-secondary" type="button" (click)="filtrarPorEstado(1)">En curso</button>
+      <button class="btn btn-outline-secondary" type="button" (click)="filtrarPorEstado(2)">Finalizado</button>
+    </div>
+    <div class="card m-4" *ngFor="let partido of partidos">
+    <div class="card-header">
+    <div *ngIf="(partido.estado == null || partido.estado==0) && partidos.length">
+      <div class="row">
+        <div class="col">
+          <h2>Pendiente</h2>
+        </div>
+        <div class="col text-end">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="grey" class="bi bi-circle-fill" viewBox="0 0 16 16">
+            <circle cx="8" cy="8" r="8"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+      <div *ngIf="partido.estado==1 && content.length">
+        <div class="row">
+          <div class="col">
+            <h2>En curso</h2>
+          </div>
+          <div class="col text-end">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-circle-fill" viewBox="0 0 16 16">
+              <circle cx="8" cy="8" r="8"/>
+            </svg>
+          </div>
+        </div>
+    </div>
+      <div *ngIf="partido.estado==2 && content.length">
+        <div class="row">
+          <div class="col">
+            <h2>Finalizado</h2>
+          </div>
+          <div class="col text-end">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16">
+              <circle cx="8" cy="8" r="8"/>
+            </svg>
+          </div>
+        </div>
+    </div>
+    </div>
+      <div class="row text-center mt-4 m-1">
+        <div class="col text-center">
+          <img [src]="this.getImgSrc(partido.escudoLocal)" style="width: 90px; height: 90px;" alt="Escudo equipo {{partido.equipoLocalText}}">
+        </div>
+        <div class="col d-flex align-items-center justify-content-center">
+          <h2 class="align d-flex">{{partido.equipoLocalText}} vs {{partido.equipoVisitanteText}}</h2>
+        </div>
+        <div class="col text-center">
+          <img [src]="this.getImgSrc(partido.escudoVisitante)" style="width: 90px; height: 90px;" alt="Escudo equipo {{partido.equipoVisitanteText}}">
+        </div>
+      </div>
+        <h5 class=" text-center">{{partido.marcador.pset1Local}}-{{partido.marcador.pset1Visitante}}/{{partido.marcador.pset2Local}}-{{partido.marcador.pset2Visitante}}/{{partido.marcador.pset3Local}}-{{partido.marcador.pset3Visitante}}/{{partido.marcador.pset4Local}}-{{partido.marcador.pset4Visitante}}/{{partido.marcador.pset5Local}}-{{partido.marcador.pset5Visitante}}/</h5>
+        <a href="marcador/{{partido.id}}" class="btn btn-primary">Marcador Online</a>
+    </div>
+  </ng-container>
+
 </div>
