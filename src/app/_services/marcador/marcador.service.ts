@@ -48,5 +48,8 @@ export class MarcadorService {
   getPartidosByUserId(id: number): Observable<any> {
     return this.http.get<any>(`${this.url}arbitro/${id}`);
   }
+getPartidosByFederacionId(id: string): Observable<any> {
+    return this.http.get<any>(`${this.url}federacion/${id}`);
+  }
 
 }

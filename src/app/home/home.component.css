@@ -1,5 +1,4 @@
-.carousel-inner > .item > img,
-.carousel-inner > .item > a > img {
-  width: 60%;
-  margin: auto;
+.bg-dark {
+  --bs-bg-opacity: 1 !important;
+  background-color: rgba(33,37,41,1)!important;
 }

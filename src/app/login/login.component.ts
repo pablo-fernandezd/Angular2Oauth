@@ -54,7 +54,7 @@ if (this.tokenStorage.getToken()) {
     this.errorMessage = error;
     this.isLoginFailed = true;
   }
-  if(this.isLoggedIn && this.currentUser.isEnable){
+if(this.isLoggedIn && this.currentUser.isEnable){
     window.location.href = '/home';
   }
   else if (this.isLoggedIn && !this.currentUser.isEnable){

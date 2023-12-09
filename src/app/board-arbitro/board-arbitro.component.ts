@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MarcadorService} from '../_services/marcador/marcador.service';
 import {TokenStorageService} from '../_services/token-storage.service';
+import {PartidoService} from '../_services/Partido/partido.service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-board-user',
@@ -9,16 +11,18 @@ import {TokenStorageService} from '../_services/token-storage.service';
 })
 export class BoardArbitroComponent implements OnInit {
 
-  content: string;
+  content: any;
+  partidos: any;
   private currentUser: any;
 
-  constructor(private marcadorService: MarcadorService, private token: TokenStorageService) { }
+  constructor(private sanitizer: DomSanitizer,private marcadorService: MarcadorService,private partidoService: PartidoService, private token: TokenStorageService) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
     this.marcadorService.getPartidosByUserId(this.currentUser.id).subscribe(
       data => {
         this.content = data;
+        this.partidos = this.content;
         console.log(this.content);
       },
       err => {
@@ -27,4 +31,18 @@ export class BoardArbitroComponent implements OnInit {
     );
   }
 
+  filtrarPorEstado(param: number | null) {
+    if (param == null){
+      this.partidos = this.content;
+    }else{
+      this.partidos = this.content.filter(partido => partido.estado === param);
+    }
+  }
+
+  getImgSrc(imagen) {
+    // Sanitiza la URL para evitar problemas de seguridad
+    const sanitizedImage = this.sanitizer.bypassSecurityTrustUrl(`data:image;base64,${imagen}`);
+
+    return sanitizedImage;
+  }
 }

@@ -1,0 +1,4 @@
+.horizontal-list {
+  display: flex;
+  list-style: none; /* Elimina los puntos de lista */
+}

@@ -56,12 +56,15 @@ export class AppComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
 
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showArbitroBoard = this.roles.includes('ROLE_ARBITRO');
-      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.showAdminBoard = this.roles.some(role => role.includes('ROLE_ADMIN'));
+      this.showArbitroBoard = this.roles.some(role => role.includes('ROLE_ARBITRO'));
+      this.showModeratorBoard = this.roles.some(role => role.includes('ROLE_MODERATOR'));
 
       this.username = user.displayName;
     }
+    this.federaciones.forEach(federacion =>{
+        federacion.secciones = this.cogerSecciones(federacion.nombre)
+    });
   }
 
 isRutaEspecial(url: string) {
@@ -70,7 +73,7 @@ isRutaEspecial(url: string) {
     const partes = url.split("/"); // Divide la cadena en partes usando "/"
     const nombreFederacion = partes[2];
     this.federacion=nombreFederacion;
-    this.cogerSecciones(nombreFederacion);
+    this.secciones = this.cogerSecciones(nombreFederacion);
   }
 }
   private delay(ms: number) {
@@ -80,10 +83,10 @@ isRutaEspecial(url: string) {
       this.federacionService.getByName(nombreFederacion)
         .subscribe(
           data => {
-            this.secciones = data[0].secciones;
+            return data[0].secciones;
           },
           err => {
-            this.secciones = JSON.parse(err.error).message;
+           return JSON.parse(err.error).message;
           }
         );
   }
@@ -98,7 +101,11 @@ isRutaEspecial(url: string) {
   filtrarSecciones(nombreSeccion: string) {
     // Lógica para filtrar secciones según el nombre de la federación
     if (nombreSeccion) {
-      this.seccionesFiltradas = this.secciones.filter(seccion => seccion.nombreLargo === nombreSeccion);
+      this.seccionesFiltradas = this.secciones.filter(seccion => seccion.nombreLargo == nombreSeccion);
     }
+  }
+
+  isHomeRoute(): boolean {
+    return this.router.url.includes('/home');
   }
 }

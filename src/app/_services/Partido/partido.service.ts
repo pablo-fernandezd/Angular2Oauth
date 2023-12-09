@@ -21,4 +21,8 @@ export class PartidoService {
     return this.http.post(`${this.url}/create`, partido);
   }
 
+  eliminarEquipo(id) {
+      const url = `${AppConstants.API_URL}partidos/delete?partidoId=${id}`;
+      return this.http.delete(url);
+  }
 }

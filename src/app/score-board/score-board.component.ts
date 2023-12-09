@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import {MarcadorService} from '../_services/marcador/marcador.service';
+import {DomSanitizer} from '@angular/platform-browser';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-volleyball-scoreboard',
@@ -10,7 +12,7 @@ import {MarcadorService} from '../_services/marcador/marcador.service';
 })
 export class ScoreBoardComponent {
   public partido: any;
-  constructor(private rutaActiva: ActivatedRoute, private marcadorService: MarcadorService) {
+  constructor(private sanitizer: DomSanitizer,private rutaActiva: ActivatedRoute, private marcadorService: MarcadorService) {
   }
 
   ngOnInit(): void {
@@ -48,7 +50,7 @@ export class ScoreBoardComponent {
         this.partido = data;
       },
       err => {
-        console.log(err);
+        Swal.fire('Error', err.error.message, 'error');
       }
     );  }
 
@@ -106,6 +108,13 @@ export class ScoreBoardComponent {
         console.log(err);
       }
     );
+  }
+
+  getImgSrc(imagen) {
+    // Sanitiza la URL para evitar problemas de seguridad
+    const sanitizedImage = this.sanitizer.bypassSecurityTrustUrl(`data:image;base64,${imagen}`);
+
+    return sanitizedImage;
   }
 }
 

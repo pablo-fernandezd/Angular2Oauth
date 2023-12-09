@@ -1,3 +1,38 @@
-<div>
-  <h6 class="text-muted py-5">{{ content }}</h6>
+<!-- Agrega estilos de Bootstrap al ng-container para que parezca un modal -->
+<ng-container *ngIf="federacion=='null'" class=" fade m-5" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog m-5" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">Bienvenido, {{ currentUser.nombre }}!</h1>
+      </div>
+      <div class="modal-body">
+        <h3>Para continuar, selecciona la federación que deseas administrar:</h3>
+        <select [(ngModel)]="federacion" (change)="handleFederationSelect($event.target.value)" class="form-control">
+          <option *ngFor="let federation of adminFederations" [value]="federation">
+            {{ federation }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<div *ngIf="federacion!='null' && adminFederations.length != 1" class="d-flex">
+  <h1 class="m-3">Federación: {{federacion}}</h1>
+  <button type="button" class="btn btn-dark m-3" (click)="federacion='null'">Cambiar <svg _ngcontent-yqn-c111="" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="bi bi-pencil-square"><path _ngcontent-yqn-c111="" d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path><path _ngcontent-yqn-c111="" fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"></path></svg></button>
 </div>
+<ng-container *ngIf="federacion!='null'"><nav class="d-flex justify-content-center">
+
+  <ul class="list-group list-group-horizontal-sm text-center" routerLinkActive="active">
+    <li class="list-group-item" [class.active]="opcion === 0"><a href="javascript:void(0)" class="nav-link right" (click)="cambiarOpcion(0)">Gestionar partidos</a></li>
+    <li class="list-group-item" [class.active]="opcion === 1"><a href="javascript:void(0)" class="nav-link right" (click)="cambiarOpcion(1)">Gestionar usuarios </a></li>
+    <li class="list-group-item" [class.active]="opcion === 2"><a href="javascript:void(0)" class="nav-link right" (click)="cambiarOpcion(2)">Gestionar equipos</a></li>
+    <li class="list-group-item" [class.active]="opcion === 3"><a href="javascript:void(0)" class="nav-link right" (click)="cambiarOpcion(3)">Gestionar secciones</a></li>
+  </ul>
+</nav>
+
+<app-partidos *ngIf="opcion == 0"  [federacion]="federacion"></app-partidos>
+<app-usuarios *ngIf="opcion == 1"  [federacion]="federacion"></app-usuarios>
+<app-equipos *ngIf="opcion == 2"  [federacion]="federacion"></app-equipos>
+<app-equipos *ngIf="opcion == 3"  [federacion]="federacion"></app-equipos>
+
+</ng-container>

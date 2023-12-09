@@ -8,4 +8,7 @@ ng-container {
   margin-top: 80px;
 }
 
-
+.bg-dark {
+  --bs-bg-opacity: 1 !important;
+  background-color: rgba(33,37,41,1)!important;
+}

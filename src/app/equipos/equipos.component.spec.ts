@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import {BoardModeratorComponent} from './board-moderator.component';
+import {EquiposComponent} from './equipos.component';
 
-describe('BoardModeratorComponent', () => {
-  let component: BoardModeratorComponent;
-  let fixture: ComponentFixture<BoardModeratorComponent>;
+describe('BoardAdminComponent', () => {
+  let component: EquiposComponent;
+  let fixture: ComponentFixture<EquiposComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ BoardModeratorComponent ]
+      declarations: [ EquiposComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BoardModeratorComponent);
+    fixture = TestBed.createComponent(EquiposComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
