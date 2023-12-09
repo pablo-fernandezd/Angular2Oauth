@@ -7,11 +7,11 @@ import {ResetPasswordComponent} from './resetPassword/resetPassword.component';
 import {HomeComponent} from './home/home.component';
 import {ProfileComponent} from './profile/profile.component';
 import {BoardUserComponent} from './board-user/board-user.component';
-import {BoardModeratorComponent} from './board-moderator/board-moderator.component';
 import {BoardAdminComponent} from './board-admin/board-admin.component';
 import { CreacionContraseña } from './login/creacionContraseña.guard';
 import {ScoreBoardComponent} from './score-board/score-board.component';
 import {FederacionesComponent} from './federaciones/federaciones.component';
+import {BoardArbitroComponent} from './board-arbitro/board-arbitro.component';
 
 
 const routes: Routes = [
@@ -22,10 +22,11 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'user', component: BoardUserComponent },
-  { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
+  { path: 'arbitro', component: BoardArbitroComponent },
+  { path: 'federacion/:federacion/:seccion', component: FederacionesComponent},
   { path: 'federacion/:federacion', component: FederacionesComponent},
-  { path: 'marcadorOnline/:idPartido', component: ScoreBoardComponent },
+  { path: 'marcador/:idPartido', component: ScoreBoardComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
