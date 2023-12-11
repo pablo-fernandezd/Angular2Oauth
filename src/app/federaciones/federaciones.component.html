@@ -6,8 +6,8 @@
     <div class="container" *ngFor="let entrada of entradas">
       <h2>{{entrada.titulo}}</h2>
       <p>{{entrada.descripcion}}</p>
-      <ng-container *ngIf="entrada.imagenTitulo!=null">
-        <img src="{{entrada.titulo}}" alt="imagen de la entrada">
+      <ng-container *ngIf="entrada.imagen!=null">
+        <img [src]="this.getImgSrc(entrada.imagen)" [alt]="entrada.titulo">
       </ng-container>
     </div>
   </ng-container>
@@ -73,6 +73,9 @@
         <h5 class=" text-center">{{partido.marcador.pset1Local}}-{{partido.marcador.pset1Visitante}}/{{partido.marcador.pset2Local}}-{{partido.marcador.pset2Visitante}}/{{partido.marcador.pset3Local}}-{{partido.marcador.pset3Visitante}}/{{partido.marcador.pset4Local}}-{{partido.marcador.pset4Visitante}}/{{partido.marcador.pset5Local}}-{{partido.marcador.pset5Visitante}}/</h5>
         <p class="m-1 text-end">{{partido.fechaPartido | date:'dd/MM/yyyy HH:mm'}}</p>
       </div>
+    </ng-container>
+    <ng-container *ngIf="!this.partidos || this.partidos?.length == 0">
+      <h2>Actualmente no hay partidos para {{federacion}}</h2>
     </ng-container>
   </ng-container>
 

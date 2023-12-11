@@ -26,7 +26,7 @@
             </li>
           </ng-container>
         </ul>
-        <ul class="navbar-nav" *ngIf="federaciones && federaciones?.length <= 6 && federaciones?.length>3 ">
+        <ul class="navbar-nav" *ngIf="federaciones && federaciones?.length>3 ">
           <ng-container *ngFor="let federation of federaciones">
             <li class="nav-item dropdown" [class.active]="federacion==federation.nombre">
               <a *ngIf="federation.secciones?.length>0" class="nav-link dropdown-toggle right" id="navbarDropdown_{{ federation.nombreLargo }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -41,7 +41,7 @@
             </li>
           </ng-container>
         </ul>
-        <ng-container *ngIf="federaciones && federaciones?.length >= 7">
+       <!--<ng-container *ngIf="federaciones && federaciones?.length >= 7">
           <li class="nav-item dropdown" >
             <a class="nav-link dropdown-toggle right" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               federaciones
@@ -53,7 +53,7 @@
               <ng-container *ngTemplateOutlet="dropdownItems"></ng-container>
             </div>
           </li>
-        </ng-container>      </ul>
+        </ng-container>    -->   </ul>
     <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
       <li class="nav-item"><a href="/register" class="nav-link mr-auto" routerLink="register">Sign Up</a></li>
       <li class="nav-item"><a href="/login" class="nav-link mr-auto" routerLink="login">Login</a></li>

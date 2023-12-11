@@ -19,10 +19,12 @@ export class FederacionesComponent implements OnInit {
   private partidos: any;
   private partidosFiltrados: any;
   seccionNombre: string;
+  federacion: any;
 
   constructor(private sanitizer: DomSanitizer, private marcadorService: MarcadorService, private rutaActiva: ActivatedRoute, private federacionService: FederacionService) { }
 
   ngOnInit(): void {
+    this.federacion = this.rutaActiva.snapshot.params.federacion;
     this.federacionService.getByName(this.rutaActiva.snapshot.params.federacion)
       .subscribe(
       data => {
@@ -47,7 +49,6 @@ export class FederacionesComponent implements OnInit {
         this.partidosFiltrados = this.partidos;
       },
       err => {
-        this.content = JSON.parse(err.error).message;
       }
     );
   }

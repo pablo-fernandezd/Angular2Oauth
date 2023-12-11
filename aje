@@ -1,0 +1,107 @@
+[33mcommit 46fe50b8773b8a6c61adac7a85a296cec49e080a[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Merge: 21cbecf 27cba9f
+Author: pafernin <pafernin@gmail.com>
+Date:   Sat Dec 9 16:36:14 2023 +0100
+
+    Merge branch 'recover'
+    
+    # Conflicts:
+    #       src/app/_services/Partido/partido.service.ts
+    #       src/app/app-routing.module.ts
+    #       src/app/app.component.html
+    #       src/app/app.component.ts
+    #       src/app/app.module.ts
+    #       src/app/federaciones/federaciones.component.html
+    #       src/app/federaciones/federaciones.component.ts
+    #       src/app/login/login.component.ts
+
+[33mcommit 27cba9f304ee438c8c9cbbc4ce1d7ff75bb40b00[m[33m ([m[1;31morigin/recover[m[33m, [m[1;32mrecover[m[33m)[m
+Author: pafernin <pafernin@gmail.com>
+Date:   Sat Dec 9 16:31:28 2023 +0100
+
+    recover try
+
+[33mcommit 21cbecfdaf4c6688b6b4080318382b085b9203e9[m
+Author: GETRONICS\pfernandez3 <pablo.fernandez@getronics.com>
+Date:   Fri Nov 10 11:49:28 2023 +0100
+
+    fix navbar
+
+[33mcommit 73a8bafd58880a1cec68ae302842ede566417f8a[m
+Author: pafernin <pafernin@gmail.com>
+Date:   Fri Nov 10 11:29:50 2023 +0100
+
+    Cambios funcionando, falta arreglar vistas por federación, navegación, página de moderador para editar usuarios y pagina de arbitros para ver listado de partidos
+
+[33mcommit c7e86c289ccd1909099fc326e7ed53ee91b8a745[m
+Author: pafernin <pafernin@gmail.com>
+Date:   Sat Jun 10 18:43:29 2023 +0200
+
+    Creado componente resetPassword
+
+[33mcommit aaf922eebe2fc2a7aad359988c0d80b038d6eff8[m
+Author: pafernin <pafernin@gmail.com>
+Date:   Sun May 21 23:33:49 2023 +0200
+
+    Nombre y apellidos en los formularios y en los servicios asociados
+
+[33mcommit f4c3a5b4a81fc5c154acb0396ae56e7004244c43[m
+Author: pafernin <pafernin@gmail.com>
+Date:   Wed May 17 10:08:31 2023 +0200
+
+    fix cambios en marcador, agregado servicio de busqueda de partidos por userId y nueva pantalla de arbitro
+
+[33mcommit 48ac1b1054377a36c75de2c30c946418632db5d9[m
+Author: GETRONICS\pfernandez3 <pablo.fernandez@getronics.com>
+Date:   Fri Feb 24 14:54:20 2023 +0100
+
+    no message
+
+[33mcommit 26a64b8afdcbd4c3a94e2165d721a4e1b676a591[m
+Author: pafernin <pafernin@gmail.com>
+Date:   Thu Feb 23 19:10:09 2023 +0100
+
+    FIX SOLVE
+
+[33mcommit 4ce4283db37c8b01634fcefff7508196ea34a6d6[m
+Merge: 8bce094 77b2097
+Author: pafernin <pafernin@gmail.com>
+Date:   Thu Feb 23 17:33:23 2023 +0100
+
+    Merge branch 'main' of https://github.com/pablo-fernandezd/Angular2Oauth
+
+[33mcommit 8bce0942d49f4f4a09e9f448570b299290a7d17f[m
+Author: pafernin <pafernin@gmail.com>
+Date:   Thu Feb 23 17:32:50 2023 +0100
+
+    marcadores alineados y cambio de lado
+
+[33mcommit 77b2097aed09213e6bce3a70cde8533b208289de[m
+Author: GETRONICS\pfernandez3 <pablo.fernandez@getronics.com>
+Date:   Thu Feb 23 17:31:27 2023 +0100
+
+    no message
+
+[33mcommit 90af3b422aff00d206f574faea6c6cd4d73d7ba3[m
+Author: pafernin <pafernin@gmail.com>
+Date:   Thu Feb 23 15:53:24 2023 +0100
+
+    no message
+
+[33mcommit 6a988798f4967ddcdc17f287702917be4b042ed8[m
+Author: pafernin <pafernin@gmail.com>
+Date:   Sun Feb 19 19:28:47 2023 +0100
+
+    Login completado con redirección
+
+[33mcommit 2241b58ec9e9f30b3c58f04afa5484f5ad835598[m
+Author: pafernin <pafernin@gmail.com>
+Date:   Sat Feb 18 18:06:32 2023 +0100
+
+    init
+
+[33mcommit ba6280214d093027dd96916c7f12b060c1f281e7[m
+Author: pafernin <pafernin@gmail.com>
+Date:   Sat Feb 18 18:06:16 2023 +0100
+
+    no message

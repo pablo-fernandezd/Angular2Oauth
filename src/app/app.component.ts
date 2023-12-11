@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
   ).subscribe(async (event: NavigationEnd) => {
     await this.delay(0); // Esperar 0 ms para permitir que Angular procese los cambios
     this.isRutaEspecial(event.url);
-    this.filtrarSecciones('Noticias');
+    this.filtrarSecciones('Resultados');
   }); }
 
   ngOnInit(): void {
@@ -62,11 +62,12 @@ export class AppComponent implements OnInit {
 
       this.username = user.displayName;
     }
+    if (this.federaciones){
     this.federaciones.forEach(federacion =>{
         federacion.secciones = this.cogerSecciones(federacion.nombre)
     });
   }
-
+  }
 isRutaEspecial(url: string) {
   this.isRutaEspecialFlag = url.includes("/federacion");
   if (url.includes("/federacion")){
@@ -100,7 +101,7 @@ isRutaEspecial(url: string) {
 
   filtrarSecciones(nombreSeccion: string) {
     // Lógica para filtrar secciones según el nombre de la federación
-    if (nombreSeccion) {
+    if (nombreSeccion && this.secciones) {
       this.seccionesFiltradas = this.secciones.filter(seccion => seccion.nombreLargo == nombreSeccion);
     }
   }
