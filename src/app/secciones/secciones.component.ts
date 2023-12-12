@@ -209,6 +209,7 @@ export class SeccionesComponent implements OnInit {
   }
 
   abrirModalDeCreacionSeccion(content: any) {
+    this.nuevaSeccion = {};
     this.modalService.open(content, { centered: true });
   }
   abrirModalDeEdicionSeccion(modal: any, seccion: Object) {

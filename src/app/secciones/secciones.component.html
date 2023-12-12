@@ -5,7 +5,7 @@
       <div class="accordion" id="seccionesAccordion">
         <div *ngFor="let equipo of secciones" class="accordion-item">
           <h2 *ngIf="equipo.nombreLargo!='Resultados'" class="accordion-header" id="seccion{{equipo.id}}Header">
-            <button class="accordion-button" (click)="toggleCollapse(equipo.id)" type="button" data-bs-toggle="collapse" data-bs-target="#seccion{{equipo.id}}Collapse" aria-expanded="true" aria-controls="seccion{{equipo.id}}Collapse">
+            <button class="accordion-button" style="background: #dddddd" (click)="toggleCollapse(equipo.id)" type="button" data-bs-toggle="collapse" data-bs-target="#seccion{{equipo.id}}Collapse" aria-expanded="true" aria-controls="seccion{{equipo.id}}Collapse">
               <p class="m-3">{{ equipo.nombreLargo }}</p>
               <button class="btn btn-dark  m-2" (click)="abrirModalDeEdicionSeccion(modalDeCreacionSeccion, equipo)">Editar Seccion
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -27,7 +27,7 @@
                 <div>
                   <ul>
                     <li class="list-group-item d-flex" *ngFor="let entrada of equipo.entradas">
-                      <h4>{{entrada.titulo}}</h4>
+                      <h4 class="m-2">{{entrada.titulo}}</h4>
                       <img *ngIf="entrada.imagen" class="mx-auto m-2" [src]="getImgSrc(entrada.imagen)" style="width: 45px; height: 45px;" alt="Imagen entrada {{ entrada.titulo }}">
                       <button class="btn btn-dark  m-2" (click)="abrirModalDeEdicionEntrada(modalDeCreacionEntrada, entrada)">Editar Seccion
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
