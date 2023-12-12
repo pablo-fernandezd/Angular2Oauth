@@ -1,0 +1,108 @@
+<div class="container-fluid bg-light container mt-5">
+  <h2>Gestión de Usuarios</h2>
+  <div class="container mt-5">
+    <ng-container *ngIf="secciones && secciones?.length > 0">
+      <div class="accordion" id="seccionesAccordion">
+        <div *ngFor="let equipo of secciones" class="accordion-item">
+          <h2 *ngIf="equipo.nombreLargo!='Resultados'" class="accordion-header" id="seccion{{equipo.id}}Header">
+            <button class="accordion-button" (click)="toggleCollapse(equipo.id)" type="button" data-bs-toggle="collapse" data-bs-target="#seccion{{equipo.id}}Collapse" aria-expanded="true" aria-controls="seccion{{equipo.id}}Collapse">
+              <p class="m-3">{{ equipo.nombreLargo }}</p>
+              <button class="btn btn-dark  m-2" (click)="abrirModalDeEdicionSeccion(modalDeCreacionSeccion, equipo)">Editar Seccion
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
+                  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"></path>
+                </svg>
+              </button>
+              <button class="btn btn-danger  m-2" (click)="confirmarEliminarSeccion(equipo.id)">Eliminar
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                </svg>
+              </button>
+              <button class="btn btn-success m-2" (click)="abrirModalDeCreacionEquipo(modalDeCreacionEntrada,equipo.id)">Crear Entrada</button>
+            </button>
+          </h2>
+          <div id="seccion{{equipo.id}}Collapse" [ngClass]="{'accordion-collapse': true, 'collapse': true, 'show': isCollapseOpen(equipo.id)}" aria-labelledby="seccion{{equipo.id}}Header" data-bs-parent="#seccionesAccordion">
+            <div class="accordion-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <ul>
+                    <li class="list-group-item d-flex" *ngFor="let entrada of equipo.entradas">
+                      <h4>{{entrada.titulo}}</h4>
+                      <img *ngIf="entrada.imagen" class="mx-auto m-2" [src]="getImgSrc(entrada.imagen)" style="width: 45px; height: 45px;" alt="Imagen entrada {{ entrada.titulo }}">
+                      <button class="btn btn-dark  m-2" (click)="abrirModalDeEdicionEntrada(modalDeCreacionEntrada, entrada)">Editar Seccion
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
+                          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"></path>
+                        </svg>
+                      </button>
+                      <button class="btn btn-danger  m-2" (click)="confirmarEliminarEntrada(entrada.id)">Eliminar
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                          <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                        </svg>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <!-- Botón para abrir el modal de creación -->
+  <button class="btn btn-success m-2" (click)="abrirModalDeCreacionSeccion(modalDeCreacionSeccion)">Crear Seccion</button>
+  <!-- Modal de creación de entrada -->
+  <ng-template #modalDeCreacionEntrada let-modal>
+    <div class="modal-header m-2">
+      <h4 class="modal-title">Crear Entrada</h4>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #crearEquipoForm="ngForm">
+        <div class="form-group">
+          <label for="nombreEquipo">Titulo de la entrada:</label>
+          <input type="text" id="nombreEquipo" class="form-control" name="nombreEquipo" [(ngModel)]="nuevoEquipo.titulo" required>
+        </div>
+        <input type="hidden" name="modoEdicion" [(ngModel)]="id" [defaultValue]="id">
+        <input type="hidden" name="modoEdicion" [(ngModel)]="nuevoEquipo.seccionId" [defaultValue]="id">
+        <div class="form-group">
+          <label for="ciudad">Descripción:</label>
+          <textarea  type="text" id="ciudad" class="form-control" name="ciudad" [(ngModel)]="nuevoEquipo.descripcion" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="escudo">Escudo:</label>
+          <input type="file" id="escudo" class="form-control" name="escudo" (change)="onFileChange($event)" accept=".jpg, .jpeg, .png" required>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn w" (click)="modal.dismiss('Cancelar'); nuevoEquipo=null">Cancelar</button>
+      <button type="button" class="btn btn-primary" (click)="crearEntrada(nuevoEquipo, crearEquipoForm); modal.close('Guardar')">Guardar</button>
+    </div>
+  </ng-template>
+  <ng-template #modalDeCreacionSeccion let-modal>
+    <div class="modal-header m-2">
+      <h4 class="modal-title">Crear Seccion</h4>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #crearSeccionForm="ngForm">
+        <div class="form-group">
+          <label for="nombreSeccion">Nombre de la sección:</label>
+          <input type="text" id="nombreSeccion" class="form-control" name="nombreSeccion" [(ngModel)]="nuevaSeccion.nombreLargo" required>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn w" (click)="modal.dismiss('Cancelar'); nuevaSeccion=null">Cancelar</button>
+      <button type="button" class="btn btn-primary" (click)="crearSeccion(nuevaSeccion, crearSeccionForm); modal.close('Guardar')">Guardar</button>
+    </div>
+  </ng-template>
+
+</div>

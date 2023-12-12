@@ -30,7 +30,7 @@ export class FederacionesComponent implements OnInit {
       data => {
         this.secciones = data[0].secciones;
         if (this.rutaActiva.snapshot.params.seccion==null){
-        this.filtrarSecciones("Noticias");
+        this.filtrarSecciones("Resultados");
         }
         else{
           this.seccionNombre = this.rutaActiva.snapshot.params.seccion;

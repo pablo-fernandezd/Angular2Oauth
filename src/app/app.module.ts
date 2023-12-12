@@ -30,6 +30,7 @@ import {NavigationStart, Router} from '@angular/router';
 import {PartidosComponent} from './partidos/partidos.component';
 import {UsuariosComponent} from './usuaros/usuarios.component';
 import {EquiposComponent} from './equipos/equipos.component';
+import {SeccionesComponent} from './secciones/secciones.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {EquiposComponent} from './equipos/equipos.component';
     FederacionesComponent,
     PartidosComponent,
     UsuariosComponent,
-    EquiposComponent
+    EquiposComponent,
+    SeccionesComponent
   ],
   imports: [
     BrowserModule,
