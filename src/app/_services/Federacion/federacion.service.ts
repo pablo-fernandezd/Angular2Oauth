@@ -24,7 +24,6 @@ export class FederacionService {
   getAll(): Observable<any> {
     return this.http.get(AppConstants.API_URL + 'federaciones/', {responseType: 'json'});
   }
-
   createFederacion(federacion): Observable<any> {
     return this.http.post(AppConstants.API_URL + 'federaciones/', {
       nombre: federacion.nombre,

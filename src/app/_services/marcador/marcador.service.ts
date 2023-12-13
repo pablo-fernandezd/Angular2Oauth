@@ -51,5 +51,8 @@ export class MarcadorService {
 getPartidosByFederacionId(id: string): Observable<any> {
     return this.http.get<any>(`${this.url}federacion/${id}`);
   }
+  getArbitros(federacion): Observable<any> {
+    return this.http.get(AppConstants.API_URL + 'arbitros/' + federacion+"/", {responseType: 'json'});
+  }
 
 }

@@ -5,8 +5,8 @@ export class PartidoDTO {
   estado : number;
   equipoLocal: string;
   equipoVisitante: string;
-  equipoLocalId: number;
-  equipoVisitanteId: number;
+  equipoLocal_Id: number;
+  equipoVisitante_Id: number;
   ganadorPerdedorRelacionado: number;
   equipoLocalRelacionadoPartido: number;
   equipoVisitanteRelacionadoPartido: number;
@@ -16,4 +16,6 @@ export class PartidoDTO {
   nPosCruces: number;
   crearStream: boolean;
   federacionNombre: string;
+  equipoVisitanteText: string;
+  equipoLocalText: string;
 }

@@ -3,7 +3,7 @@
   <ng-template #modalDeCreacion let-modal>
     <div class="modal-header m-2">
       <h4 class="modal-title">Crear Partido</h4>
-      <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+      <button type="button" class="close" (click)="modal.dismiss('Cross click'); nuevoPartido=null">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -21,19 +21,38 @@
         -->
 
         <div class="form-group">
-          <label for="equipoVisitante">Equipo Local:</label>
-          <input type="text" id="equipoLocalText" class="form-control" name="equipoLocal" [(ngModel)]="nuevoPartido.equipoLocal" required>
+          <input type="text" name="equipoLocal" list="equiposListLocal" [(ngModel)]="nuevoPartido.equipoLocal">
+          <datalist id="equiposListLocal">
+            <option *ngFor="let equipo of equipos" [value]="equipo.id">{{ equipo.nombre }}</option>
+          </datalist>
         </div>
 
         <div class="form-group">
-          <label for="equipoVisitante">Equipo Visitante:</label>
-          <input type="text" id="equipoVisitanteText" class="form-control" name="equipoVisitante" [(ngModel)]="nuevoPartido.equipoVisitante" required>
+          <input type="text" name="equipoVisitante" list="equiposListVisitante" [(ngModel)]="nuevoPartido.equipoVisitante">
+          <datalist id="equiposListVisitante">
+              <option *ngFor="let equipo of equipos" [value]="equipo.id">{{ equipo.nombre }}</option>
+          </datalist>
         </div>
 
         <div class="form-group">
           <label for="pabellon">Pabellon:</label>
           <input type="text" id="pabellon" class="form-control" name="pabellon" [(ngModel)]="nuevoPartido.pabellon">
         </div>
+        <div class="form-group" *ngFor="let arbitro of nuevoPartido.arbitroPartidoDTO; let i = index">
+          <label for="arbitro{{ i + 1 }}">Arbitro {{ i + 1 }}:</label>
+          <select name="tipoArbitro{{ i + 1 }}" [(ngModel)]="nuevoPartido.arbitroPartidoDTO[i].tipoArbitro">
+            <option value="Primero">Primero</option>
+            <option value="Segundo">Segundo</option>
+            <option value="Anotador">Anotador</option>
+          </select>
+
+          <input type="text" name="arbitro{{ i + 1 }}" list="arbitros" [(ngModel)]="nuevoPartido.arbitroPartidoDTO[i].arbitro_id">
+          <datalist id="arbitros">
+            <option *ngFor="let arbitro of arbitros" [value]="arbitro.nlicencia">{{ arbitro.usuario.nombre}} {{arbitro.usuario.apellido1}} {{arbitro.usuario.apellido2 }}</option>
+          </datalist>
+        </div>
+
+        <button type="button" (click)="agregarArbitro()">Agregar Arbitro</button>
 
         <div class="form-group">
           <label class="m-1" for="crearStream">Crear Stream:</label>

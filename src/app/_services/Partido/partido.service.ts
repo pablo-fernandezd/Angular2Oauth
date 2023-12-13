@@ -18,7 +18,7 @@ export class PartidoService {
   constructor(private http: HttpClient) { }
 
   crearOActualizarPartido(partido: PartidoDTO): Observable<any> {
-    return this.http.post(`${this.url}/create`, partido);
+    return this.http.post(`${AppConstants.API_URL}partidos/create`, partido);
   }
 
   eliminarEquipo(id) {

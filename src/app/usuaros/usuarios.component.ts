@@ -47,9 +47,25 @@ export class UsuariosComponent implements OnInit {
   abrirModalDeCreacion(content): void {
     this.modalService.open(content, {centered: true});
   }
-  editarPrivilegios(user: any): void {
-    // Implementa la lógica para editar los privilegios del usuario
-    console.log('Editar privilegios para:', user);
+  toggleArbitro(user: any): void {
+    this.userService.toggleArbitro(user, this.federacion).subscribe(
+      data => {
+        Swal.fire('Éxito', 'Usuario modificado correctamente', 'success');
+      },
+      err => {
+        Swal.fire('Error', 'No se pudieron modificar los roles del usuario', 'error');
+      }
+    );
+  }
+  toggleAdmin(user: any): void {
+    this.userService.toggleAdmin(user, this.federacion).subscribe(
+      data => {
+        Swal.fire('Éxito', 'Usuario modificado correctamente', 'success');
+      },
+      err => {
+        Swal.fire('Error', 'No se pudieron modificar los roles del usuario', 'error');
+      }
+    );
   }
 
   // Filtra la lista de usuarios según el texto de búsqueda
