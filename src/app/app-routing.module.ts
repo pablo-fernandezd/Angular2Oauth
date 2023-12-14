@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: 'federacion/:federacion/:seccion', component: FederacionesComponent},
   { path: 'federacion/:federacion', component: FederacionesComponent},
   { path: 'marcador/:idPartido', component: ScoreBoardComponent },
+  { path: 'home', component: HomeComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

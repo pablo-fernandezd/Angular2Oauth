@@ -39,10 +39,10 @@ export class UserService {
     return this.http.get(AppConstants.API_URL + 'arbitros/browse/'+federacion+'/'+pattern , httpOptions);
   }
   toggleArbitro(userId, federacion): Observable<any> {
-    return this.http.get(AppConstants.API_URL + '/arbitros/toggleArbitro?userId='+userId+"&federacion="+federacion , httpOptions);
+    return this.http.get(AppConstants.API_URL + 'arbitros/toggleArbitro?userId='+userId+"&federacion="+federacion , httpOptions);
   }
   toggleAdmin(userId, federacion): Observable<any> {
-    return this.http.get(AppConstants.API_URL + '/arbitros/toggleAdmin?userId='+userId+"&federacion="+federacion , httpOptions);
+    return this.http.get(AppConstants.API_URL + 'arbitros/toggleAdmin?userId='+userId+"&federacion="+federacion , httpOptions);
   }
 
   eliminarUsuario(id: number): Observable<any> {

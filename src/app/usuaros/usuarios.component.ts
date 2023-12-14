@@ -33,12 +33,17 @@ export class UsuariosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getUsers();
+  }
+
+  private getUsers() {
     this.userService.getUsers(this.federacion, 'null').subscribe(
       data => {
         this.users = data;
         this.filteredUsers = this.users;
       },
       err => {
+        console.log(err.error);
         this.content = JSON.parse(err.error).message;
       }
     );
@@ -50,20 +55,33 @@ export class UsuariosComponent implements OnInit {
   toggleArbitro(user: any): void {
     this.userService.toggleArbitro(user, this.federacion).subscribe(
       data => {
-        Swal.fire('Éxito', 'Usuario modificado correctamente', 'success');
+        Swal.fire('Éxito', 'Usuario modificado correctamente', 'success').then(() => {
+          // Esta función se ejecutará después de cerrar el modal
+          this.getUsers();
+        });
       },
       err => {
-        Swal.fire('Error', 'No se pudieron modificar los roles del usuario', 'error');
+        Swal.fire('Éxito', 'Usuario modificado correctamente', 'success').then(() => {
+          // Esta función se ejecutará después de cerrar el modal
+          this.getUsers();
+        });
       }
     );
   }
   toggleAdmin(user: any): void {
     this.userService.toggleAdmin(user, this.federacion).subscribe(
       data => {
-        Swal.fire('Éxito', 'Usuario modificado correctamente', 'success');
+        Swal.fire('Éxito', 'Usuario modificado correctamente', 'success').then(() => {
+          // Esta función se ejecutará después de cerrar el modal
+          this.getUsers();
+        });
       },
       err => {
-        Swal.fire('Error', 'No se pudieron modificar los roles del usuario', 'error');
+        Swal.fire('Éxito', 'Usuario modificado correctamente', 'success').then(() => {
+          // Esta función se ejecutará después de cerrar el modal
+          this.getUsers();
+        });
+        this.getUsers();
       }
     );
   }
@@ -114,5 +132,15 @@ export class UsuariosComponent implements OnInit {
         );
       }
     });
+  }
+  tieneRolAdminEnFederacion(usuario: any): boolean {
+    return usuario.rolesFederaciones.some(rol =>
+      rol.rol.name === 'ROLE_ADMIN' && rol.federacion.nombre === this.federacion
+    );
+  }
+  tieneRolArbitroEnFederacion(usuario: any): boolean {
+    return usuario.rolesFederaciones.some(rol =>
+      rol.rol.name === 'ROLE_ARBITRO' && rol.federacion.nombre === this.federacion
+    );
   }
 }

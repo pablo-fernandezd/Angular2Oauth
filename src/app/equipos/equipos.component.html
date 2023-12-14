@@ -8,7 +8,8 @@
       <li class="list-group-item" *ngFor="let equipo of equipos">
         <div class="d-flex justify-content-between align-items-center">
           <div class="d-flex">
-            <img class="mx-auto m-2" [src]="this.getImgSrc(equipo.escudo)" style="width: 45px; height: 45px;" alt="Escudo equipo {{equipo.nombre}}">
+            <img *ngIf="equipo.escudo && equipo.escudo!=null" class="mx-auto m-2" [src]="this.getImgSrc(equipo.escudo)" style="width: 45px; height: 45px;" alt="Escudo equipo {{equipo.nombre}}">
+            <img *ngIf=" !equipo.escudo || equipo.escudo==null" class="mx-auto m-2" src="assets/img/equipo.png" style="width: 45px; height: 45px;" alt="Escudo equipo {{equipo.nombre}}">
             <h5 class="m-2">{{ equipo.nombre }}</h5>
           </div>
           <div>

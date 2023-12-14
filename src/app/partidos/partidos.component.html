@@ -116,14 +116,15 @@
       </div>
       <div class="row text-center m-1">
         <div class="col text-center">
-          <img [src]="this.getImgSrc(partido.escudoLocal)" style="width: 90px; height: 90px;" alt="Escudo equipo {{partido.equipoLocalText}}">
+          <img *ngIf="partido.escudoLocal && partido.escudoLocal!=null" [src]="this.getImgSrc(partido.escudoLocal)" style="width: 90px; height: 90px;" alt="Escudo equipo {{partido.equipoLocalText}}">
+          <img *ngIf="!partido.escudoLocal || partido.escudoLocal==null" src="assets/img/equipo.png" style="width: 90px; height: 90px;" alt="Escudo equipo {{partido.equipoLocalText}}">
         </div>
         <div class="col d-flex align-items-center justify-content-center">
           <h3 class="align d-flex">{{partido.equipoLocalText}} vs {{partido.equipoVisitanteText}}</h3>
         </div>
         <div class="col text-center">
-          <img [src]="this.getImgSrc(partido.escudoVisitante)" style="width: 90px; height: 90px;" alt="Escudo equipo {{partido.equipoVisitanteText}}">
-        </div>
+          <img  *ngIf="partido.escudoVisitante && partido.escudoVisitante!=null" [src]="this.getImgSrc(partido.escudoVisitante)" style="width: 90px; height: 90px;" alt="Escudo equipo {{partido.equipoVisitanteText}}">
+          <img  *ngIf=" !partido.escudoVisitante || partido.escudoVisitante==null" src="assets/img/equipo.png"  style="width: 90px; height: 90px;" alt="Escudo equipo {{partido.equipoVisitanteText}}">        </div>
       </div>
       <h5 class=" text-center">{{partido.marcador.pset1Local}}-{{partido.marcador.pset1Visitante}}/{{partido.marcador.pset2Local}}-{{partido.marcador.pset2Visitante}}/{{partido.marcador.pset3Local}}-{{partido.marcador.pset3Visitante}}/{{partido.marcador.pset4Local}}-{{partido.marcador.pset4Visitante}}/{{partido.marcador.pset5Local}}-{{partido.marcador.pset5Visitante}}/</h5>
       <div class="row text-center mt-4 m-1">
