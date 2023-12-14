@@ -10,7 +10,8 @@
           <div class="row flex-nowrap" [ngClass]="{' flex-row-reverse': swapColumns}">
             <div class="col-md-6 col-sm-6 col-ss-6">
               <div class="d-flex align-items-center">
-                <img class="mx-auto" [src]="this.getImgSrc(partido.escudoLocal)" style="width: 45px; height: 45px;" alt="Escudo equipo {{partido.equipoLocalText}}">
+                <img *ngIf="partido.escudoLocal && partido.escudoLocal!=null" class="mx-auto" [src]="this.getImgSrc(partido.escudoLocal)" style="width: 45px; height: 45px;" alt="Escudo equipo {{partido.equipoLocalText}}">
+                <img *ngIf="!partido.escudoLocal || partido.escudoLocal==null" class="mx-auto" src="assets/img/equipo.png"  style="width: 45px; height: 45px;" alt="Escudo equipo {{partido.equipoLocalText}}">
               </div>
               <h5 class="flex-fill text-center equipo">{{this.partido.equipoLocalText}}</h5>
               <div class="d-flex flex-column justify-content-center column mb-3">
@@ -21,8 +22,8 @@
             </div>
             <div class="col-md-6 col-sm-6 col-ss-6 ">
               <div class="d-flex align-items-center">
-              <img class="mx-auto" [src]="this.getImgSrc(partido.escudoVisitante)" style="width: 45px; height: 45px;" alt="Escudo equipo {{partido.equipoVisitanteText}}">
-              </div>
+                <img *ngIf="partido.escudoVisitante && partido.escudoVisitante!=null" class="mx-auto" [src]="this.getImgSrc(partido.escudoLocal)" style="width: 45px; height: 45px;" alt="Escudo equipo {{partido.equipoLocalText}}">
+                <img *ngIf="!partido.escudoVisitante || partido.escudoVisitante==null" class="mx-auto" src="assets/img/equipo.png"  style="width: 45px; height: 45px;" alt="Escudo equipo {{partido.equipoLocalText}}">              </div>
               <h5 class="flex-fill text-center equipo">{{this.partido.equipoVisitanteText}}</h5>
               <div class="d-flex flex-column justify-content-center column mb-3">
                 <button class="btn btn-success " (click)="sumarPuntosB()">+</button>

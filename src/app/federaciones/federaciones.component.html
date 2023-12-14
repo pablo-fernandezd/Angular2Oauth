@@ -1,7 +1,7 @@
 
 <div>
   <ng-container *ngIf="this.seccionNombre!='Resultados'">
-  <h1 class="text-muted py-5">{{  nombreLargo }}</h1>
+  <h1 class="text-muted py-5">{{  this.seccionNombre }}</h1>
   <ng-container *ngIf="entradas && entradas?.length > 0">
     <div class="container" *ngFor="let entrada of entradas">
       <h2>{{entrada.titulo}}</h2>
